@@ -1,6 +1,6 @@
-// This is the data we will be using to create our articles. Look at it, then proceed to line 93.
-// OPTIONAL: if you're feeling adventurous, try to make this data an export from a different module, and import it here.
-// You can read about ES6 modules here: https://exploringjs.com/es6/ch_modules.html#sec_basics-of-es6-modules
+// This is the data we will be using to create our articles. Look at it, then proceed to line 93.//
+// OPTIONAL: if you're feeling adventurous, try to make this data an export from a different module, and import it here.//
+// You can read about ES6 modules here: https://exploringjs.com/es6/ch_modules.html#sec_basics-of-es6-modules//
 const data = [
   {
     title: 'Lambda School Students: "We\'re the best!"',
@@ -114,3 +114,77 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+
+//create function
+function articleMaker(data) {
+
+//create elements
+const createArticle = document.createElement('div')
+const articleTitle = document.createElement('h2')
+const articleDate = document.createElement('p')
+const articleFirstParagraph = document.createElement('p')
+const articleSecondParagraph = document.createElement('p')
+const articleThirdParagraph = document.createElement('p')
+const articleExpandButton = document.createElement('span')
+
+// structure elements
+createArticle.appendChild('articleTitle')
+createArticle.appendChild('articleDate')
+createArticle.appendChild('articleFirstParagraph')
+createArticle.appendChild('articleSecondParagraph')
+createArticle.appendChild('articleThirdParagraph')
+createArticle.appendChild('articleExpandButton')
+
+//add class names
+
+
+createArticle.classList.add('articles')
+articleDate.classList.add('date')
+articleExpandButton.classList.add('expandButton')
+
+
+//set text content
+articleTitle.textContent = data.title;
+articleDate.textContent = data.date;
+articleFirstParagraph.textContent = data.firstParagraph;
+articleSecondParagraph.textContent = data.secondParagraph;
+articleThirdParagraph.textContent = data.thirdParagraph;
+articleExpandButton.textContent = '+'
+
+//add event listener
+articleExpandButton.addEventListener("click", event => {
+  createArticle.classList.toggle('article-open')
+})
+
+return createArticle;
+}
+
+//Step 4: Outside your function now, loop over the data. At each iteration you'll use your component
+//to create a div.article element and append it to the DOM inside div.articles (see index.html).
+
+const articles = document.querySelector('.articles')
+
+data.forEach(comp => {
+  const newArticle = articleMaker(comp)
+  articles.appendChild(newArticle);
+})
+
+const fifthStep = articleMaker( {title, date, firstParagraph, secondParagraph, thirdParagraph} ) {
+  title: 'Copycat',
+  date: 'Jan 5, 2020',
+  firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+        hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+        Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+  secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+        hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+        hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+        hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+  thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+        Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+        Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+}
+articles.appendChild('fifthStep')
+}
