@@ -1,6 +1,6 @@
-// This is the data we will be using to create our articles. Look at it, then proceed to line 93.//
-// OPTIONAL: if you're feeling adventurous, try to make this data an export from a different module, and import it here.//
-// You can read about ES6 modules here: https://exploringjs.com/es6/ch_modules.html#sec_basics-of-es6-modules//
+// This is the data we will be using to create our articles. Look at it, then proceed to line 93.
+// OPTIONAL: if you're feeling adventurous, try to make this data an export from a different module, and import it here.
+// You can read about ES6 modules here: https://exploringjs.com/es6/ch_modules.html#sec_basics-of-es6-modules
 const data = [
   {
     title: 'Lambda School Students: "We\'re the best!"',
@@ -93,76 +93,64 @@ const data = [
   Step 1: Write a component called 'articleMaker' to create an article.
   Your component is a function that takes an article object as its only argument,
   and returns a DOM node looking like the one below:
-
   <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
-
     {three separate paragraph elements}
-
     <span class="expandButton">+</span>
   </div>
-
   Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
   This listener should toggle the class 'article-open' on div.article.
-
   Step 3: Don't forget to return something from your function!
-
   Step 4: Outside your function now, loop over the data. At each iteration you'll use your component
   to create a div.article element and append it to the DOM inside div.articles (see index.html).
-
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
 
-
-//create function
 function articleMaker(data) {
 
-//create elements
-const createArticle = document.createElement('div')
-const articleTitle = document.createElement('h2')
-const articleDate = document.createElement('p')
-const articleFirstParagraph = document.createElement('p')
-const articleSecondParagraph = document.createElement('p')
-const articleThirdParagraph = document.createElement('p')
-const articleExpandButton = document.createElement('span')
+  //let's make those elements!
+ const articleBody = document.createElement('div')
+ const articleTitle = document.createElement('h2')
+ const articleDate = document.createElement('p')
+ const articleParagraphOne = document.createElement('p')
+ const articleParagraphTwo = document.createElement('p')
+ const articleParagraphThree = document.createElement('p')
+ const expandButton = document.createElement('span')
 
-// structure elements
-createArticle.appendChild('articleTitle')
-createArticle.appendChild('articleDate')
-createArticle.appendChild('articleFirstParagraph')
-createArticle.appendChild('articleSecondParagraph')
-createArticle.appendChild('articleThirdParagraph')
-createArticle.appendChild('articleExpandButton')
+ //now we sort them and get them properly nested
+ articleBody.appendChild(articleTitle)
+ articleBody.appendChild(articleDate)
+ articleBody.appendChild(articleParagraphOne)
+ articleBody.appendChild(articleParagraphTwo)
+ articleBody.appendChild(articleParagraphThree)
+ articleBody.appendChild(expandButton)
 
-//add class names
+ //getting those class names
+ articleBody.classList.add('articles')
+ articleDate.classList.add('date')
+ expandButton.classList.add('expandButton')
 
+ //time to add the content from the data
+ articleTitle.textContent = data.title;
+ articleDate.textContent = data.date;
+ articleParagraphOne.textContent = data.firstParagraph;
+ articleParagraphTwo.textContent = data.secondParagraph;
+ articleParagraphThree.textContent = data.thirdParagraph;
+ expandButton.textContent = '+'
 
-createArticle.classList.add('articles')
-articleDate.classList.add('date')
-articleExpandButton.classList.add('expandButton')
-
-
-//set text content
-articleTitle.textContent = data.title;
-articleDate.textContent = data.date;
-articleFirstParagraph.textContent = data.firstParagraph;
-articleSecondParagraph.textContent = data.secondParagraph;
-articleThirdParagraph.textContent = data.thirdParagraph;
-articleExpandButton.textContent = '+'
-
-//add event listener
-articleExpandButton.addEventListener("click", event => {
-  createArticle.classList.toggle('article-open')
+ //event listener
+ expandButton.addEventListener("click", event => {
+  articleBody.classList.toggle('article-open')
 })
 
-return createArticle;
+//annnnnd return all that work
+ return articleBody;
+
 }
 
-//Step 4: Outside your function now, loop over the data. At each iteration you'll use your component
-//to create a div.article element and append it to the DOM inside div.articles (see index.html).
-
+//looping over the data now
 const articles = document.querySelector('.articles')
 
 data.forEach(comp => {
@@ -170,21 +158,13 @@ data.forEach(comp => {
   articles.appendChild(newArticle);
 })
 
-const fifthStep = articleMaker( {title, date, firstParagraph, secondParagraph, thirdParagraph} ) {
-  title: 'Copycat',
-  date: 'Jan 5, 2020',
-  firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
-        hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
-        Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+const finalPiece = articleMaker({
+  title: 'Mystery Theater',
+  date: '10 years ago',
+  firstParagraph:'Imitation cheese is delicious.',
+  secondParagraph: 'Eggs, eggs, eggs, bom bom',
+  thirdParagraph: 'Oh, mort, Im telling you, to be in dinner theater... if I could do my life over again, oh, if I could just have one chance...'
 
-  secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
-        hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
-        hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
-        hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+})
 
-  thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
-        Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
-        Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
-}
-articles.appendChild('fifthStep')
-}
+articles.appendChild(finalPiece)
